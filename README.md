@@ -1,2 +1,2 @@
 # springcloud
-一个Spring boot的入门项目
+一个Spring cloud的入门项目
