@@ -1,0 +1,35 @@
+server:
+  port: 9527
+
+spring:
+  application:
+    name: microservicecloud-zuul-gateway
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka,http://eureka7003.com:7003/eureka
+
+  instance:
+    instance-id: gateway-9527.com
+    prefer-ip-address: true
+
+info:
+  app.name: timi-microcloud
+  company.name: www.wb.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
+
+
+zuul:
+  routes:
+    mydept.serviceId: microservicecloud-dept
+    mydept.path: /mydept/**
+
+#before
+  #http://myzuul.com:9527/microservicecloud-dept/dept/get/2
+#after
+  #http://myzuul.com:9527/mydept/dept/get/1
+
+  ignored-services: microservicecloud-dept  #屏蔽了 http://myzuul.com:9527/microservicecloud-dept/dept/get/2
+  prefix: /timi   #http://myzuul.com:9527/timi/mydept/dept/get/1  设置前缀
